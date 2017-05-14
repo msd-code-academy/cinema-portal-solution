@@ -9,4 +9,4 @@ export default createDevTools(
     changePositionKey='ctrl-w'>
     <LogMonitor />
   </DockMonitor>
-)
+);
