@@ -14,13 +14,13 @@ import {
 import LoginDialog from './../components/LoginDialog';
 
 class HeaderMenu extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin (credentials) {
+  handleLogin(credentials) {
     this.props.onLogin(credentials);
   }
 
@@ -37,25 +37,29 @@ class HeaderMenu extends Component {
     };
   }
 
-  renderLoginButton () {
+  renderLoginButton() {
     return (
       <Button primary onClick={this.props.onShowLoginForm}>Login</Button>
     );
   }
 
-  renderUserInfo () {
+  renderUserInfo() {
     return (
       <span>
         <span>{this.props.user.username}</span>
         <em
-          style={{cursor: 'pointer', marginLeft: '5px', display: 'inline-block'}}
+          style={{
+            cursor: 'pointer',
+            marginLeft: '5px',
+            display: 'inline-block'
+          }}
           onClick={this.props.onLogOut}
         >(logout)</em>
       </span>
     );
   }
 
-  render () {
+  render() {
     const {
       user,
       showLoginForm,
@@ -64,25 +68,24 @@ class HeaderMenu extends Component {
     } = this.props;
 
     return (
-      <div>
+      <Menu>
         {showLoginForm && <LoginDialog
           onClose={onCloseLoginForm}
           onSubmit={this.handleLogin}
           error={loginError}
         />}
-        <Menu>
-          <Route
-            exact
-            path='/'
-            children={this.getMenuItem('/', 'BIO EAR cinema', true)}
-          />
-          <Route
-            path='/checkout'
-            children={this.getMenuItem('/checkout', 'Checkout')}
-          />
-          <Menu.Item position='right'>{user ? this.renderUserInfo() : this.renderLoginButton()}</Menu.Item>
-        </Menu>
-      </div>
+        <Route
+          exact
+          path='/'
+          children={this.getMenuItem('/', 'BIO EAR cinema', true)}
+        />
+        <Route
+          path='/checkout'
+          children={this.getMenuItem('/checkout', 'Checkout')}
+        />
+        <Menu.Item
+          position='right'>{user ? this.renderUserInfo() : this.renderLoginButton()}</Menu.Item>
+      </Menu>
     );
   }
 }
