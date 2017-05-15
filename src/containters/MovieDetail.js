@@ -30,7 +30,7 @@ class MovieDetail extends Component {
   }
 
   getImageSrc () {
-    const {movie} = this.state;
+    const {movie} = this.props;
 
     if (movie) {
       return movie.image;
