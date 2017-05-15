@@ -1,4 +1,4 @@
-import {rootReducer} from './index';
+import movies from './movies';
 const movie = {
   id: 1,
   title: '12 Years a Slave',
@@ -15,21 +15,19 @@ describe('reducers', function () {
   describe('movies', function () {
     describe('GET_ALL_MOVIES_SUCCESS', function () {
       it('successfully store list of movies', function () {
-        const state = rootReducer({
-            movies: {
-              ids: [],
-              movies: {},
-              isLoading: true,
-              isListLoaded: false,
-              errorInList: new Error('Some error')
-            }
-          }, {
-            type: 'GET_ALL_MOVIES_SUCCESS',
-            movies: [
-              movie
-            ]
-          });
-        expect(state.movies).toEqual(
+        const state = movies({
+          ids: [],
+          movies: {},
+          isLoading: true,
+          isListLoaded: false,
+          errorInList: new Error('Some error')
+        }, {
+          type: 'GET_ALL_MOVIES_SUCCESS',
+          movies: [
+            movie
+          ]
+        });
+        expect(state).toEqual(
           {
             ids: [1],
             movies: {1: movie},
